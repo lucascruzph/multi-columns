@@ -1,3 +1,4 @@
+/* teste
 /**
  * Retrieves the translation of text.
  *
