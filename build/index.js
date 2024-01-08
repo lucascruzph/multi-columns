@@ -82,6 +82,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_number_control__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/number-control */ "./src/components/number-control.js");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
 
+/* teste
 /**
  * Retrieves the translation of text.
  *
