@@ -125,7 +125,9 @@ function Edit({
     columnGap,
     columnRuleStyle,
     columnRuleWidth,
-    columnRuleColor
+    columnRuleColor,
+    dropCapColor,
+    dropCapSize
   } = attributes;
   const columnStyles = {
     columnCount,
@@ -133,7 +135,10 @@ function Edit({
     columnGap,
     columnRuleStyle,
     columnRuleWidth,
-    columnRuleColor
+    columnRuleColor,
+    '--drop-cap-color': dropCapColor,
+    '--drop-cap-font-size': dropCapSize.fontSize,
+    '--drop-cap-line-height': dropCapSize.lineHeight
   };
   const ALLOWED_BLOCKS = ['core/heading', 'core/paragraph', 'core/image'];
   const TEMPLATE_PARAGRAPHS = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin finibus, lectus non interdum cursus, arcu sapien mollis lacus, et tincidunt odio nisi ut purus. Duis eleifend, magna placerat faucibus tincidunt, orci nulla ornare tortor, eget egestas tortor nunc quis sem. Cras in tortor justo. Nulla consectetur leo vel blandit consectetur. Fusce quis sapien ante. Vestibulum non varius augue, et ultricies urna. Integer hendrerit suscipit nibh.', 'Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras vestibulum mauris diam. Praesent semper diam a efficitur iaculis. Nullam lacinia augue quis lorem accumsan tempus. Maecenas dapibus velit eu blandit pretium. Nullam posuere ut ipsum in commodo. Fusce fringilla quis turpis a placerat. Etiam hendrerit velit a lacus varius ornare.'];
@@ -177,6 +182,41 @@ function Edit({
     setAttributes({
       columnRuleColor: val
     });
+  };
+  const onChangeDropCapColor = val => {
+    setAttributes({
+      dropCapColor: val
+    });
+  };
+  const onChangeDropCapSize = val => {
+    switch (val) {
+      case 'small':
+        setAttributes({
+          dropCapSize: {
+            size: 'small',
+            fontSize: '3.8rem',
+            lineHeight: '3.5rem'
+          }
+        });
+        break;
+      case 'large':
+        setAttributes({
+          dropCapSize: {
+            size: 'large',
+            fontSize: '6.2rem',
+            lineHeight: '5.2rem'
+          }
+        });
+        break;
+      default:
+        setAttributes({
+          dropCapSize: {
+            size: 'small',
+            fontSize: '3.8rem',
+            lineHeight: '3.5rem'
+          }
+        });
+    }
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Column Settings', 'multi-columns')
@@ -234,6 +274,20 @@ function Edit({
     value: columnRuleWidth,
     min: 1,
     max: 8
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Drop-Cap', 'multi-columns'),
+    initialOpen: false
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Size', 'multi-columns'),
+    onChange: onChangeDropCapSize,
+    value: dropCapSize.size,
+    options: [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Small', 'multi-columns'),
+      value: 'small'
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Large', 'multi-columns'),
+      value: 'large'
+    }]
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.PanelColorSettings, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Colour settings', 'multi-columns'),
     initialOpen: false,
@@ -241,6 +295,10 @@ function Edit({
       value: columnRuleColor,
       onChange: onChangeColumnRuleColor,
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Separator colour', 'multi-columns')
+    }, {
+      value: dropCapColor,
+      onChange: onChangeDropCapColor,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Drop-Cap colour', 'multi-columns')
     }]
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
@@ -358,7 +416,9 @@ function save({
     columnGap,
     columnRuleStyle,
     columnRuleWidth,
-    columnRuleColor
+    columnRuleColor,
+    dropCapColor,
+    dropCapSize
   } = attributes;
   const columnStyles = {
     columnCount,
@@ -366,7 +426,10 @@ function save({
     columnGap,
     columnRuleStyle,
     columnRuleWidth,
-    columnRuleColor
+    columnRuleColor,
+    '--drop-cap-color': dropCapColor,
+    '--drop-cap-font-size': dropCapSize.fontSize,
+    '--drop-cap-line-height': dropCapSize.lineHeight
   };
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
@@ -457,7 +520,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/multi-columns","version":"0.1.0","title":"Multi Columns","category":"design","icon":"columns","description":"Example block scaffolded with Create Block tool.","parent":["core/post-content"],"keywords":["newspaper","columns","flow","text"],"supports":{"html":true,"color":{},"spacing":{"margin":true,"padding":true},"align":["wide","full"]},"styles":[{"name":"default","label":"Default","isDefault":true},{"name":"drop-cap","label":"Drop-Cap"}],"example":{"innerBlocks":[{"name":"core/heading","attributes":{"level":3,"content":"Heading"}},{"name":"core/paragraph","attributes":{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin finibus, lectus non interdum cursus, arcu sapien mollis lacus, et tincidunt odio nisi ut purus. Duis eleifend, magna placerat faucibus tincidunt, orci nulla ornare tortor, eget egestas tortor nunc quis sem. Cras in tortor justo. Nulla consectetur leo vel blandit consectetur.Fusce quis sapien ante. Vestibulum non varius augue, et ultricies urna. Integer hendrerit suscipit nibh."}},{"name":"core/heading","attributes":{"level":4,"content":"Sub-heading"}},{"name":"core/paragraph","attributes":{"content":"Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras vestibulum mauris diam. Praesent semper diam a efficitur iaculis. Nullam lacinia augue quis lorem accumsan tempus."}}],"attributes":{"columnCount":3,"columnWidth":80},"viewportWidth":720},"textdomain":"multi-columns","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"style":{"type":"object","default":{"color":{"text":"#3a3a3a","background":"#fbf9f4"},"spacing":{"padding":{"top":"20px","right":"20px","bottom":"20px","left":"20px"},"margin":{"top":"20px","right":"20px","bottom":"20px","left":"20px"}}}},"columnCount":{"type":"integer","default":4},"columnWidth":{"type":"integer","default":200},"columnGap":{"type":"integer","default":40},"columnRuleStyle":{"type":"string","default":"solid"},"columnRuleWidth":{"type":"integer","default":1},"columnRuleColor":{"type":"string","default":"#b8b8b8"}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/multi-columns","version":"0.1.0","title":"Multi Columns","category":"design","icon":"columns","description":"Example block scaffolded with Create Block tool.","parent":["core/post-content"],"keywords":["newspaper","columns","flow","text"],"supports":{"html":true,"color":{},"spacing":{"margin":true,"padding":true},"align":["wide","full"]},"styles":[{"name":"default","label":"Default","isDefault":true},{"name":"drop-cap","label":"Drop-Cap"}],"example":{"innerBlocks":[{"name":"core/heading","attributes":{"level":3,"content":"Heading"}},{"name":"core/paragraph","attributes":{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin finibus, lectus non interdum cursus, arcu sapien mollis lacus, et tincidunt odio nisi ut purus. Duis eleifend, magna placerat faucibus tincidunt, orci nulla ornare tortor, eget egestas tortor nunc quis sem. Cras in tortor justo. Nulla consectetur leo vel blandit consectetur.Fusce quis sapien ante. Vestibulum non varius augue, et ultricies urna. Integer hendrerit suscipit nibh."}},{"name":"core/heading","attributes":{"level":4,"content":"Sub-heading"}},{"name":"core/paragraph","attributes":{"content":"Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras vestibulum mauris diam. Praesent semper diam a efficitur iaculis. Nullam lacinia augue quis lorem accumsan tempus."}}],"attributes":{"columnCount":3,"columnWidth":80},"viewportWidth":720},"textdomain":"multi-columns","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"style":{"type":"object","default":{"color":{"text":"#3a3a3a","background":"#fbf9f4"},"spacing":{"padding":{"top":"20px","right":"20px","bottom":"20px","left":"20px"},"margin":{"top":"20px","right":"20px","bottom":"20px","left":"20px"}}}},"columnCount":{"type":"integer","default":4},"columnWidth":{"type":"integer","default":200},"columnGap":{"type":"integer","default":40},"columnRuleStyle":{"type":"string","default":"solid"},"columnRuleWidth":{"type":"integer","default":1},"columnRuleColor":{"type":"string","default":"#b8b8b8"},"dropCapColor":{"type":"string","default":"#b8b8b8"},"dropCapSize":{"type":"object","default":{"size":"small","fontSize":"3.8rem","lineHeight":"3.5rem"}}}}');
 
 /***/ })
 
