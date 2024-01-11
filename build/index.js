@@ -218,10 +218,23 @@ function Edit({
         });
     }
   };
+  const colorSettingsDropDown = attributes.className === 'is-style-drop-cap' ? [{
+    value: columnRuleColor,
+    onChange: onChangeColumnRuleColor,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Separator colour', 'multi-columns')
+  }, {
+    value: dropCapColor,
+    onChange: onChangeDropCapColor,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Drop Capital colour', 'multi-columns')
+  }] : [{
+    value: columnRuleColor,
+    onChange: onChangeColumnRuleColor,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Separator colour', 'multi-columns')
+  }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Column Settings', 'multi-columns')
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Columns', 'multi-columns'),
+    label: "Columns",
     value: columnCount,
     onChange: onChangeColumnCount,
     min: 2,
@@ -274,7 +287,7 @@ function Edit({
     value: columnRuleWidth,
     min: 1,
     max: 8
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+  })), attributes.className === 'is-style-drop-cap' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Drop-Cap', 'multi-columns'),
     initialOpen: false
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
@@ -291,15 +304,7 @@ function Edit({
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.PanelColorSettings, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Colour settings', 'multi-columns'),
     initialOpen: false,
-    colorSettings: [{
-      value: columnRuleColor,
-      onChange: onChangeColumnRuleColor,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Separator colour', 'multi-columns')
-    }, {
-      value: dropCapColor,
-      onChange: onChangeDropCapColor,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Drop-Cap colour', 'multi-columns')
-    }]
+    colorSettings: colorSettingsDropDown
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
       style: columnStyles

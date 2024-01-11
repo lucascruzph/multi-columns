@@ -33,7 +33,6 @@ export default function save( { attributes } ) {
         dropCapColor,
         dropCapSize,
     } = attributes;
- 
     const columnStyles = {
         columnCount,
         columnWidth,
